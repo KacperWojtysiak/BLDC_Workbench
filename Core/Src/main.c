@@ -19,18 +19,16 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef hlpuart1;
-PCD_HandleTypeDef hpcd_USB_FS;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_LPUART1_UART_Init(void);
-static void MX_USB_PCD_Init(void);
 /* Private user code ---------------------------------------------------------*/
 
 int main(void)
 {
   /* MCU Configuration--------------------------------------------------------*/
-  HAL_GPIO_EXTI_Callback(B1_Pin);
+
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
   /* Configure the system clock */
@@ -113,22 +111,6 @@ static void MX_LPUART1_UART_Init(void)
     Error_Handler();
   }
   if (HAL_UARTEx_DisableFifoMode(&hlpuart1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
-
-static void MX_USB_PCD_Init(void)
-{
-  hpcd_USB_FS.Instance = USB;
-  hpcd_USB_FS.Init.dev_endpoints = 8;
-  hpcd_USB_FS.Init.speed = PCD_SPEED_FULL;
-  hpcd_USB_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
-  hpcd_USB_FS.Init.Sof_enable = DISABLE;
-  hpcd_USB_FS.Init.low_power_enable = DISABLE;
-  hpcd_USB_FS.Init.lpm_enable = DISABLE;
-  hpcd_USB_FS.Init.battery_charging_enable = DISABLE;
-  if (HAL_PCD_Init(&hpcd_USB_FS) != HAL_OK)
   {
     Error_Handler();
   }
