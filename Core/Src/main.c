@@ -34,10 +34,13 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+  DMA_Init();
+  GPIO_Init();
   MX_LPUART1_UART_Init();
-  MX_USB_PCD_Init();
+  USB_PCD_Init();
+  ADC1_Init();
 
+  ADC_StartDMA_ADC1();
   /* Infinite loop */
   while (1)
   {

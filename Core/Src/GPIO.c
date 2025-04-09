@@ -18,7 +18,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 }
 
 /* --------------------------------- PUBLIC FUNCTIONS ---------------------------------*/
-void MX_GPIO_Init(void)
+void GPIO_Init(void)
   {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
   

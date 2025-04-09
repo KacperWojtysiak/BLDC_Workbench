@@ -38,7 +38,7 @@ extern "C" {
 #define T_SWO_GPIO_Port       GPIOB
 
 /* --------------------------------- PUBLIC FUNCTIONS ---------------------------------*/
-void MX_GPIO_Init(void);
+void GPIO_Init(void);
 
 #ifdef __cplusplus
 }

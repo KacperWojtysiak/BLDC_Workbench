@@ -123,3 +123,20 @@ void SysTick_Handler(void)
  {
    HAL_GPIO_EXTI_IRQHandler(B1_Pin);
  }
+
+ 
+/**
+  * @brief This function handles DMA1 channel1 global interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(ADC_GetDMA1Ref());
+}
+
+/**
+  * @brief This function handles ADC1 and ADC2 global interrupt.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  HAL_ADC_IRQHandler(ADC_GetADC1Ref());
+}

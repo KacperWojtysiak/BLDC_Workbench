@@ -16,7 +16,7 @@ PCD_HandleTypeDef hpcd_USB_FS;
 
 /* --------------------------------- PUBLIC FUNCTIONS ---------------------------------*/
 
-void MX_USB_PCD_Init(void)
+void USB_PCD_Init(void)
 {
   hpcd_USB_FS.Instance = USB;
   hpcd_USB_FS.Init.dev_endpoints = 8;

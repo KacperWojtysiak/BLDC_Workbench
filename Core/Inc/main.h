@@ -29,6 +29,7 @@ extern "C" {
 #include "stm32g4xx_hal.h"
 #include "GPIO.h"
 #include "ADC.h"
+#include "DMA.h"
 #include "USB.h"
 
 /* Exported functions prototypes ---------------------------------------------*/
