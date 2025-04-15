@@ -31,6 +31,7 @@ extern "C" {
 #include "ADC.h"
 #include "DMA.h"
 #include "USB.h"
+#include "TIM.h"
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);

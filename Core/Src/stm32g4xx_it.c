@@ -18,14 +18,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32g4xx_it.h"
-/* Private includes ----------------------------------------------------------*/
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private user code ---------------------------------------------------------*/
-/* External variables --------------------------------------------------------*/
 
 /******************************************************************************/
 /*           Cortex-M4 Processor Interruption and Exception Handlers          */
@@ -140,3 +132,19 @@ void ADC1_2_IRQHandler(void)
 {
   HAL_ADC_IRQHandler(ADC_GetADC1Ref());
 }
+
+/**
+  * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
+  */
+ void TIM1_BRK_TIM15_IRQHandler(void)
+ {
+   HAL_TIM_IRQHandler(TIM_GetTim1Ref());
+ }
+ 
+ /**
+   * @brief This function handles TIM1 capture compare interrupt.
+   */
+ void TIM1_CC_IRQHandler(void)
+ {
+   HAL_TIM_IRQHandler(TIM_GetTim1Ref());
+ }

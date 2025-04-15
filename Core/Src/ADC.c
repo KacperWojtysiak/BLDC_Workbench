@@ -25,7 +25,7 @@ void ADC1_Init(void){
    /** Common config
    */
    adc1.Instance = ADC1;
-   adc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+   adc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
    adc1.Init.Resolution = ADC_RESOLUTION_12B;
    adc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
    adc1.Init.GainCompensation = 0;
