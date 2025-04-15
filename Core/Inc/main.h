@@ -121,6 +121,8 @@ void Error_Handler(void);
 #define LED_2_GPIO_Port GPIOC
 #define LED_3_Pin GPIO_PIN_11
 #define LED_3_GPIO_Port GPIOC
+#define RELAY_Pin GPIO_PIN_12
+#define RELAY_GPIO_Port GPIOC
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
 #define BOOT0_Pin GPIO_PIN_8
