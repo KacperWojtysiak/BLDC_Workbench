@@ -20,9 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "cordic.h"
-#include "dma.h"
 #include "tim.h"
-#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -92,12 +90,10 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_ADC1_Init();
   MX_ADC2_Init();
   MX_CORDIC_Init();
   MX_TIM1_Init();
-  MX_USART2_UART_Init();
   MX_MotorControl_Init();
 
   /* Initialize interrupts */
@@ -172,12 +168,6 @@ void SystemClock_Config(void)
   */
 static void MX_NVIC_Init(void)
 {
-  /* USART2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(USART2_IRQn, 3, 1);
-  HAL_NVIC_EnableIRQ(USART2_IRQn);
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
   /* TIM1_BRK_TIM15_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM1_BRK_TIM15_IRQn, 4, 1);
   HAL_NVIC_EnableIRQ(TIM1_BRK_TIM15_IRQn);
@@ -187,9 +177,6 @@ static void MX_NVIC_Init(void)
   /* ADC1_2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(ADC1_2_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
-  /* EXTI15_10_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 3, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
