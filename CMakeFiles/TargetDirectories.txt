@@ -1,0 +1,7 @@
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/CMakeFiles/BG41.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/CMakeFiles/edit_cache.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/CMakeFiles/rebuild_cache.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/cmake/stm32cubemx/CMakeFiles/MotorControl.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+C:/Users/wojty/Desktop/Projekty/InverterBLDC/TEST/BG41/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

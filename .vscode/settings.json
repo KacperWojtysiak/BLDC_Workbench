@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "motorcontrol.h": "c",
+        "mc_config.h": "c",
+        "mc_api.h": "c",
+        "mcpa.h": "c"
+    }
+}
