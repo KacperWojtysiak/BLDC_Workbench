@@ -49,6 +49,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     ${CMAKE_SOURCE_DIR}/Src/drv8323.c
+    ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_bus_voltage_sensor.c
 )
 
 # Add include paths

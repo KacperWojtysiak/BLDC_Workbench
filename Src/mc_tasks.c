@@ -122,11 +122,10 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     /****************************************************/
     VSS_Init(&VirtualSpeedSensorM1);
 
-    /********************************************************/
-    /*   Bus voltage sensor component initialization        */
-    /********************************************************/
-    (void)RCM_RegisterRegConv(&VbusRegConv_M1);
-    RVBS_Init(&BusVoltageSensor_M1);
+    /**********************************************************/
+    /*   Virtual bus voltage sensor component initialization  */
+    /**********************************************************/
+    VVBS_Init(&BusVoltageSensor_M1);
 
     /*******************************************************/
     /*   Temperature measurement component initialization  */
@@ -365,22 +364,12 @@ __weak void TSK_SafetyTask_PWMOFF(uint8_t bMotor)
   /* USER CODE END TSK_SafetyTask_PWMOFF 0 */
   uint16_t CodeReturn = MC_NO_ERROR;
   uint8_t lbmotor = M1;
-  const uint16_t errMask[NBR_OF_MOTORS] = {VBUS_TEMP_ERR_MASK};
   /* Check for fault if FW protection is activated. It returns MC_OVER_TEMP or MC_NO_ERROR */
 
 /* Due to warning array subscript 1 is above array bounds of PWMC_Handle_t *[1] [-Warray-bounds] */
    CodeReturn |= PWMC_IsFaultOccurred(pwmcHandle[lbmotor]);     /* check for fault. It return MC_OVER_CURR or MC_NO_FAULTS
                                                      (for STM32F30x can return MC_OVER_VOLT in case of HW Overvoltage) */
 
-  if (M1 == bMotor)
-  {
-    uint16_t rawValueM1 =  RCM_ExecRegularConv(&VbusRegConv_M1);
-    CodeReturn |= errMask[bMotor] & RVBS_CalcAvVbus(&BusVoltageSensor_M1, rawValueM1);
-  }
-  else
-  {
-    /* Nothing to do */
-  }
   MCI_FaultProcessing(&Mci[bMotor], CodeReturn, ~CodeReturn); /* Process faults */
 
   if (MCI_GetFaultState(&Mci[bMotor]) != (uint32_t)MC_NO_FAULTS)
@@ -424,16 +413,15 @@ __weak void TSK_HardwareFaultTask(void)
   */
 __weak void mc_lock_pins (void)
 {
+LL_GPIO_LockPin(M1_CURR_AMPL_V_GPIO_Port, M1_CURR_AMPL_V_Pin);
 LL_GPIO_LockPin(M1_CURR_AMPL_W_GPIO_Port, M1_CURR_AMPL_W_Pin);
 LL_GPIO_LockPin(M1_CURR_AMPL_U_GPIO_Port, M1_CURR_AMPL_U_Pin);
-LL_GPIO_LockPin(M1_CURR_AMPL_V_GPIO_Port, M1_CURR_AMPL_V_Pin);
-LL_GPIO_LockPin(M1_PWM_WH_GPIO_Port, M1_PWM_WH_Pin);
+LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);
 LL_GPIO_LockPin(M1_PWM_VH_GPIO_Port, M1_PWM_VH_Pin);
 LL_GPIO_LockPin(M1_PWM_VL_GPIO_Port, M1_PWM_VL_Pin);
-LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);
-LL_GPIO_LockPin(M1_PWM_UL_GPIO_Port, M1_PWM_UL_Pin);
+LL_GPIO_LockPin(M1_PWM_WH_GPIO_Port, M1_PWM_WH_Pin);
 LL_GPIO_LockPin(M1_PWM_WL_GPIO_Port, M1_PWM_WL_Pin);
-LL_GPIO_LockPin(M1_BUS_VOLTAGE_GPIO_Port, M1_BUS_VOLTAGE_Pin);
+LL_GPIO_LockPin(M1_PWM_UL_GPIO_Port, M1_PWM_UL_Pin);
 }
 /* USER CODE BEGIN mc_task 0 */
 

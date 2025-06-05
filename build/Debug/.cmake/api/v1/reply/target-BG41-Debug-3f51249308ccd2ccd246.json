@@ -161,7 +161,8 @@
 				31,
 				32,
 				33,
-				35
+				35,
+				36
 			]
 		},
 		{
@@ -306,7 +307,8 @@
 				31,
 				32,
 				33,
-				35
+				35,
+				36
 			]
 		},
 		{
@@ -320,7 +322,6 @@
 			"name" : "Object Libraries",
 			"sourceIndexes" : 
 			[
-				36,
 				37,
 				38,
 				39,
@@ -358,7 +359,8 @@
 				71,
 				72,
 				73,
-				74
+				74,
+				75
 			]
 		}
 	],
@@ -578,6 +580,12 @@
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "Src/drv8323.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_bus_voltage_sensor.c",
 			"sourceGroupIndex" : 0
 		},
 		{

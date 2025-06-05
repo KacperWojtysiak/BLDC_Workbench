@@ -6,7 +6,7 @@
         <define key="ADC_PERIPH" value="ADC2" />
         <define key="ADC_REFERENCE_VOLTAGE" value="3.3" />
         <define key="BOARD" value="NUCLEO-G431RB" />
-        <define key="BUS_VOLTAGE_READING" value="ENABLE" />
+        <define key="BUS_VOLTAGE_READING" value="DISABLE" />
         <define key="CCMRAM_ENABLED" value="FALSE" />
         <define key="CLOCK_FREQUENCY" value="CPU_CLK_170_MHZ" />
         <define key="CLOCK_SOURCE" value="EXTERNAL" />
@@ -43,7 +43,7 @@
         <define key="M1_BEMF_CONSISTENCY_GAIN" value="64" />
         <define key="M1_BEMF_CONSISTENCY_TOL" value="64" />
         <define key="M1_BOARD_MAX_CURRENT" value="5" />
-        <define key="M1_BUS_VOLTAGE_READING" value="ENABLE" />
+        <define key="M1_BUS_VOLTAGE_READING" value="DISABLE" />
         <define key="M1_COMMUTATION_STEP_TIME_BUF_SIZE" value="12" />
         <define key="M1_CONSTANT1_D" value="23055" />
         <define key="M1_CONSTANT1_Q" value="23055" />
@@ -70,7 +70,7 @@
         <define key="M1_DRIVE_TYPE" value="FOC" />
         <define key="M1_ENABLE_SL_ALGO_FROM_PHASE" value="2" />
         <define key="M1_ENCODER_PPR" value="400" />
-        <define key="M1_F1" value="8192" />
+        <define key="M1_F1" value="2048" />
         <define key="M1_F2" value="16384" />
         <define key="M1_FEED_FORWARD_CURRENT_REG_ENABLING" value="DISABLE" />
         <define key="M1_FLUX_WEAKENING_ENABLING" value="DISABLE" />
@@ -79,7 +79,7 @@
         <define key="M1_FW_KP_GAIN" value="3000" />
         <define key="M1_FW_KPDIV" value="32768" />
         <define key="M1_FW_VOLTAGE_REF" value="985" />
-        <define key="M1_GAIN1" value="-2688" />
+        <define key="M1_GAIN1" value="-672" />
         <define key="M1_GAIN2" value="18501" />
         <define key="M1_HALL_PHASE_SHIFT" value="300" />
         <define key="M1_HALL_SENSORS_PLACEMENT" value="DEGREES_120" />
@@ -106,7 +106,6 @@
         <define key="M1_OBS_MINIMUM_SPEED_RPM" value="1793" />
         <define key="M1_OCP_TOPOLOGY" value="NONE" />
         <define key="M1_OFST" value="{0,0,0,0,0,0,0,0}" />
-        <define key="M1_OV_VOLTAGE_PROT_ENABLING" value="DISABLE" />
         <define key="M1_OVERMODULATION" value="FALSE" />
         <define key="M1_PHASE1_DURATION" value="1000" />
         <define key="M1_PHASE1_FINAL_CURRENT" value="5" />
@@ -172,12 +171,7 @@
         <define key="M1_TRANSITION_DURATION" value="25" />
         <define key="M1_TRISE_NS" value="1500" />
         <define key="M1_USE_INTERNAL_OPAMP" value="DISABLE" />
-        <define key="M1_UV_VOLTAGE_PROT_ENABLING" value="DISABLE" />
         <define key="M1_VARIANCE_THRESHOLD" value="0.25" />
-        <define key="M1_VBUS_ADC" value="ADC1" />
-        <define key="M1_VBUS_ADC_SAMPLING_TIME" value="47" />
-        <define key="M1_VBUS_CHANNEL" value="ADC_Channel_2" />
-        <define key="M1_VBUS_PARTITIONING_FACTOR" value="0.03499440089585666" />
         <define key="MAX_READABLE_CURRENT" value="16.5" />
         <define key="MC_WORKBENCH_VERSION" value="6.3.2" />
         <define key="MCP_ASPEP_OVER_UART" value="TRUE" />
@@ -206,7 +200,6 @@
         <define key="MCU_USERNAME" value="STM32G431RBTx" />
         <define key="MOTOR_PROFILER" value="FALSE" />
         <define key="MOTOR_TYPE" value="PMSM" />
-        <define key="OV_VOLTAGE_PROT_ENABLING" value="DISABLE" />
         <define key="PHASE_U_CURR_ADC" value="ADC2" />
         <define key="PHASE_U_CURR_CHANNEL" value="ADC_Channel_1" />
         <define key="PHASE_U_GPIO_PIN" value="GPIO_Pin_0" />
@@ -268,12 +261,6 @@
         <define key="USART_TX_GPIO_PORT" value="GPIOC" />
         <define key="USE_3OPAMPS" value="FALSE" />
         <define key="USE_INTERNAL_OPAMP" value="DISABLE" />
-        <define key="UV_VOLTAGE_PROT_ENABLING" value="DISABLE" />
-        <define key="VBUS_ADC" value="ADC1" />
-        <define key="VBUS_ADC_SAMPLING_TIME" value="47" />
-        <define key="VBUS_CHANNEL" value="ADC_Channel_2" />
-        <define key="VBUS_GPIO_PIN" value="GPIO_Pin_1" />
-        <define key="VBUS_GPIO_PORT" value="GPIOA" />
         <define key="WB_UI_CUTOFF_FREQUENCY" value="6000" />
         <define key="WB_UI_ENCODER_HAS_INDEX_PIN" value="FALSE" />
         <define key="WB_UI_FLUX_TARGET" value="0" />

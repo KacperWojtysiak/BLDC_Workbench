@@ -39,13 +39,13 @@
 #define VARIANCE_THRESHOLD                  0.25 /*!< Maximum accepted variance on speed estimates (percentage) */
 
 /* State observer scaling factors F1 */
-#define F1                                  8192
+#define F1                                  2048
 #define F2                                  16384
-#define F1_LOG                              LOG2((8192))
+#define F1_LOG                              LOG2((2048))
 #define F2_LOG                              LOG2((16384))
 
 /* State observer constants */
-#define GAIN1                               -2688
+#define GAIN1                               -672
 #define GAIN2                               18501
 
 /* Only in case PLL is used, PLL gains */
@@ -182,9 +182,6 @@
                                                  without being considered wrong. In 1/16 of forced speed */
 
 #define TRANSITION_DURATION                 25 /* Switch over duration, ms */
-
-/******************************   BUS VOLTAGE Motor 1  **********************/
-#define  M1_VBUS_SAMPLING_TIME              LL_ADC_SAMPLING_CYCLE(47)
 
 /******************************   Current sensing Motor 1   **********************/
 #define ADC_SAMPLING_CYCLES                 (6 + SAMPLING_CYCLE_CORRECTION)

@@ -65,33 +65,18 @@ NTC_Handle_t TempSensor_M1 =
   .hExpectedTemp_C = M1_VIRTUAL_HEAT_SINK_TEMPERATURE_VALUE,
 };
 
-/* Bus voltage sensor value filter buffer */
-static uint16_t RealBusVoltageSensorFilterBufferM1[M1_VBUS_SW_FILTER_BW_FACTOR];
-
 /**
-  * Bus voltage sensor parameters Motor 1.
+  * Virtual bus voltage sensor parameters Motor 1.
   */
-RegConv_t VbusRegConv_M1 =
-{
-  .regADC                   = ADC1,
-  .channel                  = MC_ADC_CHANNEL_2,
-  .samplingTime             = M1_VBUS_SAMPLING_TIME,
-};
-
-RDivider_Handle_t BusVoltageSensor_M1 =
+VirtualBusVoltageSensor_Handle_t BusVoltageSensor_M1 =
 {
   ._Super =
   {
-    .SensorType               = REAL_SENSOR,
-    .ConversionFactor         = (uint16_t)(ADC_REFERENCE_VOLTAGE / VBUS_PARTITIONING_FACTOR),
+    .SensorType       = VIRTUAL_SENSOR,
+    .ConversionFactor = 500,
   },
 
-  .LowPassFilterBW            =  M1_VBUS_SW_FILTER_BW_FACTOR,
-  .OverVoltageThreshold       = OVERVOLTAGE_THRESHOLD_d,
-  .OverVoltageThresholdLow    = OVERVOLTAGE_THRESHOLD_d,
-  .OverVoltageHysteresisUpDir = true,
-  .UnderVoltageThreshold      =  UNDERVOLTAGE_THRESHOLD_d,
-  .aBuffer                    = RealBusVoltageSensorFilterBufferM1,
+  .ExpectedVbus_d     = 1 + ((NOMINAL_BUS_VOLTAGE_V * 65536) / 500),
 };
 
 PWMC_Handle_t *pwmcHandle[NBR_OF_MOTORS];

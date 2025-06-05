@@ -33,7 +33,7 @@
                                                       by HW if low side signals
                                                       are not used */
 /*********** Bus voltage sensing section ****************/
-#define VBUS_PARTITIONING_FACTOR             0.03499440089585666 /*!< It expresses how
+#define VBUS_PARTITIONING_FACTOR             0.0526 /*!< It expresses how
                                                       much the Vbus is attenuated
                                                       before being converted into
                                                       digital value */

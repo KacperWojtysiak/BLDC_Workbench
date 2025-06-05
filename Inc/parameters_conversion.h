@@ -72,8 +72,7 @@
 /************************* COMMON OBSERVER PARAMETERS **************************/
 #define MAX_BEMF_VOLTAGE                    (uint16_t)((MAX_APPLICATION_SPEED_RPM * 1.2 *\
                                             MOTOR_VOLTAGE_CONSTANT * SQRT_2) / (1000u * SQRT_3))
-/* max phase voltage, 0-peak Volts*/
-#define MAX_VOLTAGE                         (int16_t)((ADC_REFERENCE_VOLTAGE / SQRT_3) / VBUS_PARTITIONING_FACTOR)
+#define MAX_VOLTAGE                         (int16_t)(500 / 2) /* Virtual sensor conversion factor */
 #define MAX_CURRENT                         (ADC_REFERENCE_VOLTAGE / (2 * RSHUNT * AMPLIFICATION_GAIN))
 #define OBS_MINIMUM_SPEED_UNIT              (uint16_t)((OBS_MINIMUM_SPEED_RPM * SPEED_UNIT) / U_RPM)
 #define MAX_APPLICATION_SPEED_UNIT          ((MAX_APPLICATION_SPEED_RPM * SPEED_UNIT) / U_RPM)
