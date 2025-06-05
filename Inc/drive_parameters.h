@@ -39,18 +39,18 @@
 #define VARIANCE_THRESHOLD                  0.25 /*!< Maximum accepted variance on speed estimates (percentage) */
 
 /* State observer scaling factors F1 */
-#define F1                                  16384
+#define F1                                  8192
 #define F2                                  16384
-#define F1_LOG                              LOG2((16384))
+#define F1_LOG                              LOG2((8192))
 #define F2_LOG                              LOG2((16384))
 
 /* State observer constants */
-#define GAIN1                               -23574
-#define GAIN2                               20826
+#define GAIN1                               -2688
+#define GAIN2                               18501
 
 /* Only in case PLL is used, PLL gains */
-#define PLL_KP_GAIN                         662
-#define PLL_KI_GAIN                         29
+#define PLL_KP_GAIN                         1987
+#define PLL_KI_GAIN                         88
 #define PLL_KPDIV                           16384
 #define PLL_KPDIV_LOG                       LOG2((PLL_KPDIV))
 #define PLL_KIDIV                           65535
@@ -79,34 +79,34 @@
 #define ISR_FREQUENCY_HZ                    (PWM_FREQUENCY/REGULATION_EXECUTION_RATE) /*!< @brief FOC execution rate in Hz */
 
 /* Gains values for torque and flux control loops */
-#define PID_TORQUE_KP_DEFAULT               2252
-#define PID_TORQUE_KI_DEFAULT               1471
+#define PID_TORQUE_KP_DEFAULT               2703
+#define PID_TORQUE_KI_DEFAULT               2111
 #define PID_TORQUE_KD_DEFAULT               100
-#define PID_FLUX_KP_DEFAULT                 2252
-#define PID_FLUX_KI_DEFAULT                 1471
+#define PID_FLUX_KP_DEFAULT                 2703
+#define PID_FLUX_KI_DEFAULT                 2111
 #define PID_FLUX_KD_DEFAULT                 100
 
 /* Torque/Flux control loop gains dividers*/
-#define TF_KPDIV                            2048
-#define TF_KIDIV                            16384
+#define TF_KPDIV                            4096
+#define TF_KIDIV                            2048
 #define TF_KDDIV                            8192
-#define TF_KPDIV_LOG                        LOG2((2048))
-#define TF_KIDIV_LOG                        LOG2((16384))
+#define TF_KPDIV_LOG                        LOG2((4096))
+#define TF_KIDIV_LOG                        LOG2((2048))
 #define TF_KDDIV_LOG                        LOG2((8192))
 #define TFDIFFERENTIAL_TERM_ENABLING        DISABLE
 
-#define PID_SPEED_KP_DEFAULT                2318/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KI_DEFAULT                149/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KP_DEFAULT                2898/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KI_DEFAULT                745/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 #define PID_SPEED_KD_DEFAULT                0/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 
 /* Speed control loop */
 #define SPEED_LOOP_FREQUENCY_HZ             (uint16_t)1000 /*!<Execution rate of speed regulation loop (Hz) */
 
 /* Speed PID parameter dividers */
-#define SP_KPDIV                            256
+#define SP_KPDIV                            64
 #define SP_KIDIV                            16384
 #define SP_KDDIV                            16
-#define SP_KPDIV_LOG                        LOG2((256))
+#define SP_KPDIV_LOG                        LOG2((64))
 #define SP_KIDIV_LOG                        LOG2((16384))
 #define SP_KDDIV_LOG                        LOG2((16))
 

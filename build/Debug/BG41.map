@@ -9524,7 +9524,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x24a CMakeFiles/BG41.dir/Src/mc_perf.c.obj
  .debug_macro   0x00000000       0x10 CMakeFiles/BG41.dir/Src/mc_perf.c.obj
  .debug_line    0x00000000      0xbee CMakeFiles/BG41.dir/Src/mc_perf.c.obj
- .debug_str     0x00000000    0xf0e3f CMakeFiles/BG41.dir/Src/mc_perf.c.obj
+ .debug_str     0x00000000    0xf0e39 CMakeFiles/BG41.dir/Src/mc_perf.c.obj
  .comment       0x00000000       0x44 CMakeFiles/BG41.dir/Src/mc_perf.c.obj
  .debug_frame   0x00000000      0x150 CMakeFiles/BG41.dir/Src/mc_perf.c.obj
  .ARM.attributes
@@ -13855,71 +13855,71 @@ LOAD C:/ST/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/
  .debug_line    0x0003d362      0x853 CMakeFiles/BG41.dir/Src/drv8323.c.obj
  .debug_line    0x0003dbb5      0x202 C:/ST/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memcpy-stub.o)
 
-.debug_str      0x00000000   0x103695
- .debug_str     0x00000000   0x103695 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system_stm32g4xx.c.obj
+.debug_str      0x00000000   0x10368f
+ .debug_str     0x00000000   0x10368f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system_stm32g4xx.c.obj
                               0xd4b72 (size before relaxing)
- .debug_str     0x00103695    0xd5ba4 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c.obj
- .debug_str     0x00103695    0xd5b4a cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c.obj
- .debug_str     0x00103695    0xd5708 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
- .debug_str     0x00103695    0xd5270 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
- .debug_str     0x00103695    0xd5271 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
- .debug_str     0x00103695    0xd4d02 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
- .debug_str     0x00103695    0xd4f51 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
- .debug_str     0x00103695    0xd5065 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
- .debug_str     0x00103695    0xd5372 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
- .debug_str     0x00103695    0xd501d cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c.obj
- .debug_str     0x00103695    0xd54af cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
- .debug_str     0x00103695    0xd6075 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
- .debug_str     0x00103695    0xd5ce9 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
- .debug_str     0x00103695    0xd5b32 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
- .debug_str     0x00103695    0xd5330 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
- .debug_str     0x00103695    0xeb3ae cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c.obj
- .debug_str     0x00103695    0xed9da cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c.obj
- .debug_str     0x00103695    0xeb47f cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c.obj
- .debug_str     0x00103695    0xeb67c cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c.obj
- .debug_str     0x00103695    0xeb510 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c.obj
- .debug_str     0x00103695    0xeb4cd cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c.obj
- .debug_str     0x00103695    0xeb43b cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c.obj
- .debug_str     0x00103695    0xec317 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c.obj
- .debug_str     0x00103695    0xeb53b cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c.obj
- .debug_str     0x00103695    0xeb9af cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c.obj
- .debug_str     0x00103695    0xee507 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c.obj
- .debug_str     0x00103695    0xeb706 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c.obj
- .debug_str     0x00103695    0xec7ff cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_1_g4xx_pwm_curr_fdbk.c.obj
- .debug_str     0x00103695    0xf1d9a CMakeFiles/BG41.dir/Src/main.c.obj
- .debug_str     0x00103695    0xf186f CMakeFiles/BG41.dir/Src/gpio.c.obj
- .debug_str     0x00103695    0xf2278 CMakeFiles/BG41.dir/Src/adc.c.obj
- .debug_str     0x00103695    0xf1c13 CMakeFiles/BG41.dir/Src/cordic.c.obj
- .debug_str     0x00103695    0xf17a1 CMakeFiles/BG41.dir/Src/dma.c.obj
- .debug_str     0x00103695    0xf289b CMakeFiles/BG41.dir/Src/motorcontrol.c.obj
- .debug_str     0x00103695    0xeb619 CMakeFiles/BG41.dir/Src/pwm_common.c.obj
- .debug_str     0x00103695    0xed365 CMakeFiles/BG41.dir/Src/mc_api.c.obj
- .debug_str     0x00103695    0xf31c2 CMakeFiles/BG41.dir/Src/mc_config.c.obj
- .debug_str     0x00103695    0xf2062 CMakeFiles/BG41.dir/Src/mc_config_common.c.obj
- .debug_str     0x00103695    0xf16f5 CMakeFiles/BG41.dir/Src/mcp_config.c.obj
- .debug_str     0x00103695    0xf370c CMakeFiles/BG41.dir/Src/mc_tasks.c.obj
- .debug_str     0x00103695    0xf3fc9 CMakeFiles/BG41.dir/Src/mc_tasks_foc.c.obj
- .debug_str     0x00103695    0xee2ca CMakeFiles/BG41.dir/Src/pwm_curr_fdbk.c.obj
- .debug_str     0x00103695    0xec7bc CMakeFiles/BG41.dir/Src/regular_conversion_manager.c.obj
- .debug_str     0x00103695    0xedae0 CMakeFiles/BG41.dir/Src/mc_math.c.obj
- .debug_str     0x00103695    0xf2668 CMakeFiles/BG41.dir/Src/mc_interface.c.obj
- .debug_str     0x00103695    0xf2193 CMakeFiles/BG41.dir/Src/stm32_mc_common_it.c.obj
- .debug_str     0x00103695    0xf1ebb CMakeFiles/BG41.dir/Src/stm32g4xx_mc_it.c.obj
- .debug_str     0x00103695    0xf1ae7 CMakeFiles/BG41.dir/Src/mc_parameters.c.obj
- .debug_str     0x00103695    0xf9170 CMakeFiles/BG41.dir/Src/register_interface.c.obj
- .debug_str     0x00103695    0xf58c4 CMakeFiles/BG41.dir/Src/mcp.c.obj
- .debug_str     0x00103695    0xf1067 CMakeFiles/BG41.dir/Src/usart_aspep_driver.c.obj
- .debug_str     0x00103695    0xf47a9 CMakeFiles/BG41.dir/Src/mc_configuration_registers.c.obj
- .debug_str     0x00103695    0xf132f CMakeFiles/BG41.dir/Src/aspep.c.obj
- .debug_str     0x00103695    0xeb2d9 CMakeFiles/BG41.dir/Src/mc_app_hooks.c.obj
- .debug_str     0x00103695    0xf222d CMakeFiles/BG41.dir/Src/spi.c.obj
- .debug_str     0x00103695    0xf2556 CMakeFiles/BG41.dir/Src/tim.c.obj
- .debug_str     0x00103695    0xf24aa CMakeFiles/BG41.dir/Src/usart.c.obj
- .debug_str     0x00103695    0xf1b5a CMakeFiles/BG41.dir/Src/stm32g4xx_it.c.obj
- .debug_str     0x00103695    0xf17e2 CMakeFiles/BG41.dir/Src/stm32g4xx_hal_msp.c.obj
- .debug_str     0x00103695       0xac CMakeFiles/BG41.dir/startup_stm32g431xx.s.obj
- .debug_str     0x00103695    0xd50b5 CMakeFiles/BG41.dir/Src/drv8323.c.obj
- .debug_str     0x00103695      0x22f C:/ST/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memcpy-stub.o)
+ .debug_str     0x0010368f    0xd5ba4 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c.obj
+ .debug_str     0x0010368f    0xd5b4a cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c.obj
+ .debug_str     0x0010368f    0xd5708 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj
+ .debug_str     0x0010368f    0xd5270 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj
+ .debug_str     0x0010368f    0xd5271 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj
+ .debug_str     0x0010368f    0xd4d02 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj
+ .debug_str     0x0010368f    0xd4f51 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj
+ .debug_str     0x0010368f    0xd5065 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj
+ .debug_str     0x0010368f    0xd5372 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj
+ .debug_str     0x0010368f    0xd501d cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c.obj
+ .debug_str     0x0010368f    0xd54af cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c.obj
+ .debug_str     0x0010368f    0xd6075 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj
+ .debug_str     0x0010368f    0xd5ce9 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj
+ .debug_str     0x0010368f    0xd5b32 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj
+ .debug_str     0x0010368f    0xd5330 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj
+ .debug_str     0x0010368f    0xeb3ae cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c.obj
+ .debug_str     0x0010368f    0xed9da cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c.obj
+ .debug_str     0x0010368f    0xeb47f cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c.obj
+ .debug_str     0x0010368f    0xeb67c cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c.obj
+ .debug_str     0x0010368f    0xeb510 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c.obj
+ .debug_str     0x0010368f    0xeb4cd cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c.obj
+ .debug_str     0x0010368f    0xeb43b cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c.obj
+ .debug_str     0x0010368f    0xec317 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c.obj
+ .debug_str     0x0010368f    0xeb53b cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c.obj
+ .debug_str     0x0010368f    0xeb9af cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c.obj
+ .debug_str     0x0010368f    0xee507 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c.obj
+ .debug_str     0x0010368f    0xeb706 cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c.obj
+ .debug_str     0x0010368f    0xec7ff cmake/stm32cubemx/CMakeFiles/MotorControl.dir/__/__/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_1_g4xx_pwm_curr_fdbk.c.obj
+ .debug_str     0x0010368f    0xf1d94 CMakeFiles/BG41.dir/Src/main.c.obj
+ .debug_str     0x0010368f    0xf1869 CMakeFiles/BG41.dir/Src/gpio.c.obj
+ .debug_str     0x0010368f    0xf2272 CMakeFiles/BG41.dir/Src/adc.c.obj
+ .debug_str     0x0010368f    0xf1c0d CMakeFiles/BG41.dir/Src/cordic.c.obj
+ .debug_str     0x0010368f    0xf179b CMakeFiles/BG41.dir/Src/dma.c.obj
+ .debug_str     0x0010368f    0xf2895 CMakeFiles/BG41.dir/Src/motorcontrol.c.obj
+ .debug_str     0x0010368f    0xeb619 CMakeFiles/BG41.dir/Src/pwm_common.c.obj
+ .debug_str     0x0010368f    0xed365 CMakeFiles/BG41.dir/Src/mc_api.c.obj
+ .debug_str     0x0010368f    0xf31bc CMakeFiles/BG41.dir/Src/mc_config.c.obj
+ .debug_str     0x0010368f    0xf205c CMakeFiles/BG41.dir/Src/mc_config_common.c.obj
+ .debug_str     0x0010368f    0xf16ef CMakeFiles/BG41.dir/Src/mcp_config.c.obj
+ .debug_str     0x0010368f    0xf3706 CMakeFiles/BG41.dir/Src/mc_tasks.c.obj
+ .debug_str     0x0010368f    0xf3fc3 CMakeFiles/BG41.dir/Src/mc_tasks_foc.c.obj
+ .debug_str     0x0010368f    0xee2ca CMakeFiles/BG41.dir/Src/pwm_curr_fdbk.c.obj
+ .debug_str     0x0010368f    0xec7bc CMakeFiles/BG41.dir/Src/regular_conversion_manager.c.obj
+ .debug_str     0x0010368f    0xedae0 CMakeFiles/BG41.dir/Src/mc_math.c.obj
+ .debug_str     0x0010368f    0xf2662 CMakeFiles/BG41.dir/Src/mc_interface.c.obj
+ .debug_str     0x0010368f    0xf218d CMakeFiles/BG41.dir/Src/stm32_mc_common_it.c.obj
+ .debug_str     0x0010368f    0xf1eb5 CMakeFiles/BG41.dir/Src/stm32g4xx_mc_it.c.obj
+ .debug_str     0x0010368f    0xf1ae1 CMakeFiles/BG41.dir/Src/mc_parameters.c.obj
+ .debug_str     0x0010368f    0xf916a CMakeFiles/BG41.dir/Src/register_interface.c.obj
+ .debug_str     0x0010368f    0xf58be CMakeFiles/BG41.dir/Src/mcp.c.obj
+ .debug_str     0x0010368f    0xf1061 CMakeFiles/BG41.dir/Src/usart_aspep_driver.c.obj
+ .debug_str     0x0010368f    0xf47a3 CMakeFiles/BG41.dir/Src/mc_configuration_registers.c.obj
+ .debug_str     0x0010368f    0xf1329 CMakeFiles/BG41.dir/Src/aspep.c.obj
+ .debug_str     0x0010368f    0xeb2d9 CMakeFiles/BG41.dir/Src/mc_app_hooks.c.obj
+ .debug_str     0x0010368f    0xf2227 CMakeFiles/BG41.dir/Src/spi.c.obj
+ .debug_str     0x0010368f    0xf2550 CMakeFiles/BG41.dir/Src/tim.c.obj
+ .debug_str     0x0010368f    0xf24a4 CMakeFiles/BG41.dir/Src/usart.c.obj
+ .debug_str     0x0010368f    0xf1b54 CMakeFiles/BG41.dir/Src/stm32g4xx_it.c.obj
+ .debug_str     0x0010368f    0xf17dc CMakeFiles/BG41.dir/Src/stm32g4xx_hal_msp.c.obj
+ .debug_str     0x0010368f       0xac CMakeFiles/BG41.dir/startup_stm32g431xx.s.obj
+ .debug_str     0x0010368f    0xd50b5 CMakeFiles/BG41.dir/Src/drv8323.c.obj
+ .debug_str     0x0010368f      0x22f C:/ST/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libg_nano.a(libc_a-memcpy-stub.o)
 
 .debug_line_str
                 0x00000000       0x90
