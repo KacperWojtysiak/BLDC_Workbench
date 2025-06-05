@@ -39,18 +39,18 @@
 #define VARIANCE_THRESHOLD                  0.25 /*!< Maximum accepted variance on speed estimates (percentage) */
 
 /* State observer scaling factors F1 */
-#define F1                                  8192
+#define F1                                  16384
 #define F2                                  16384
-#define F1_LOG                              LOG2((8192))
+#define F1_LOG                              LOG2((16384))
 #define F2_LOG                              LOG2((16384))
 
 /* State observer constants */
-#define GAIN1                               -11486
-#define GAIN2                               13224
+#define GAIN1                               -23574
+#define GAIN2                               20826
 
 /* Only in case PLL is used, PLL gains */
-#define PLL_KP_GAIN                         1060
-#define PLL_KI_GAIN                         75
+#define PLL_KP_GAIN                         662
+#define PLL_KI_GAIN                         29
 #define PLL_KPDIV                           16384
 #define PLL_KPDIV_LOG                       LOG2((PLL_KPDIV))
 #define PLL_KIDIV                           65535
@@ -69,7 +69,7 @@
 
 /**************************    DRIVE SETTINGS SECTION   **********************/
 /* PWM generation and current reading */
-#define PWM_FREQUENCY                       10000
+#define PWM_FREQUENCY                       16000
 #define PWM_FREQ_SCALING                    1
 #define LOW_SIDE_SIGNALS_ENABLING           LS_PWM_TIMER
 #define SW_DEADTIME_NS                      700 /*!< Dead-time to be inserted by FW, only if low side signals are enabled */
@@ -80,10 +80,10 @@
 
 /* Gains values for torque and flux control loops */
 #define PID_TORQUE_KP_DEFAULT               2252
-#define PID_TORQUE_KI_DEFAULT               2353
+#define PID_TORQUE_KI_DEFAULT               1471
 #define PID_TORQUE_KD_DEFAULT               100
 #define PID_FLUX_KP_DEFAULT                 2252
-#define PID_FLUX_KI_DEFAULT                 2353
+#define PID_FLUX_KI_DEFAULT                 1471
 #define PID_FLUX_KD_DEFAULT                 100
 
 /* Torque/Flux control loop gains dividers*/
@@ -121,7 +121,7 @@
 #define DEFAULT_CONTROL_MODE                MCM_TORQUE_MODE
 #define DEFAULT_TARGET_SPEED_RPM            1793
 #define DEFAULT_TARGET_SPEED_UNIT           (DEFAULT_TARGET_SPEED_RPM*SPEED_UNIT/U_RPM)
-#define DEFAULT_TORQUE_COMPONENT_A          0
+#define DEFAULT_TORQUE_COMPONENT_A          0.5
 #define DEFAULT_FLUX_COMPONENT_A            0
 
 /**************************    FIRMWARE PROTECTIONS SECTION   *****************/

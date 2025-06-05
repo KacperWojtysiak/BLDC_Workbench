@@ -20,7 +20,10 @@
 #include "main.h"
 #include "adc.h"
 #include "cordic.h"
+#include "dma.h"
+#include "spi.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -90,16 +93,27 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   MX_ADC2_Init();
   MX_CORDIC_Init();
   MX_TIM1_Init();
+  MX_USART1_UART_Init();
   MX_MotorControl_Init();
+  MX_SPI1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
+  DRV8323_setupSpi();
+  // MC_StartPolarizationOffsetsMeasurementMotor1();
 
+  // qd_f_t currentRef;
+  // currentRef.q = 0.5f;   // 0.5 A moment (Iq)
+  // currentRef.d = 0.0f; 
+  // // MC_SetCurrentReferenceMotor1_F(currentRef);
+  // MC_StartMotor1();
+  // MC_ProgramTorqueRampMotor1_F(0.5, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -168,6 +182,12 @@ void SystemClock_Config(void)
   */
 static void MX_NVIC_Init(void)
 {
+  /* USART1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART1_IRQn, 3, 1);
+  HAL_NVIC_EnableIRQ(USART1_IRQn);
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 3, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
   /* TIM1_BRK_TIM15_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM1_BRK_TIM15_IRQn, 4, 1);
   HAL_NVIC_EnableIRQ(TIM1_BRK_TIM15_IRQn);

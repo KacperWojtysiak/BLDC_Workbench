@@ -115,7 +115,7 @@ typedef struct
 
 /* MCP_Flag definition */
 #define FLAG_MCP_OVER_STLINK       0U
-#define FLAG_MCP_OVER_UARTA        0U
+#define FLAG_MCP_OVER_UARTA        (1U << 1U)
 #define FLAG_MCP_OVER_UARTB        0U
 
 #define configurationFlag1_M1     (VBUS_SENSING_FLAG)
@@ -126,7 +126,7 @@ typedef struct
 #define AUX_SENSOR_M1             ENO_SENSOR
 #define TOPOLOGY_M1               0
 #define FOC_RATE_M1               1
-#define PWM_FREQ_M1               10000
+#define PWM_FREQ_M1               16000
 
 extern const char_t FIRMWARE_NAME[]; //cstat !MISRAC2012-Rule-18.8 !MISRAC2012-Rule-8.11
 extern const char_t CTL_BOARD[]; //cstat !MISRAC2012-Rule-18.8 !MISRAC2012-Rule-8.11

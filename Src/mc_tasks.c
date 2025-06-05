@@ -32,6 +32,7 @@
 #include "pwm_common.h"
 #include "mc_tasks.h"
 #include "parameters_conversion.h"
+#include "mcp_config.h"
 #include "mc_app_hooks.h"
 
 /* USER CODE BEGIN Includes */
@@ -106,6 +107,7 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     pMCIList[M1] = &Mci[M1];
     FOC_Init();
 
+    ASPEP_start(&aspepOverUartA);
     /* USER CODE BEGIN MCboot 1 */
 
     /* USER CODE END MCboot 1 */
@@ -179,6 +181,30 @@ __weak void MC_RunMotorControlTasks(void)
 
       /* Applicative hook at end of Medium Frequency for Motor 1 */
       MC_APP_PostMediumFrequencyHook_M1();
+
+      MCP_Over_UartA.rxBuffer = MCP_Over_UartA.pTransportLayer->fRXPacketProcess(MCP_Over_UartA.pTransportLayer,
+                                                                                &MCP_Over_UartA.rxLength);
+      if ( 0U == MCP_Over_UartA.rxBuffer)
+      {
+        /* Nothing to do */
+      }
+      else
+      {
+        /* Synchronous answer */
+        if (0U == MCP_Over_UartA.pTransportLayer->fGetBuffer(MCP_Over_UartA.pTransportLayer,
+                                                     (void **) &MCP_Over_UartA.txBuffer, //cstat !MISRAC2012-Rule-11.3
+                                                     MCTL_SYNC))
+        {
+          /* No buffer available to build the answer ... should not occur */
+        }
+        else
+        {
+          MCP_ReceivedPacket(&MCP_Over_UartA);
+          MCP_Over_UartA.pTransportLayer->fSendPacket(MCP_Over_UartA.pTransportLayer, MCP_Over_UartA.txBuffer,
+                                                      MCP_Over_UartA.txLength, MCTL_SYNC);
+          /* No buffer available to build the answer ... should not occur */
+        }
+      }
 
       /* USER CODE BEGIN MC_Scheduler 1 */
 
@@ -401,12 +427,12 @@ __weak void mc_lock_pins (void)
 LL_GPIO_LockPin(M1_CURR_AMPL_W_GPIO_Port, M1_CURR_AMPL_W_Pin);
 LL_GPIO_LockPin(M1_CURR_AMPL_U_GPIO_Port, M1_CURR_AMPL_U_Pin);
 LL_GPIO_LockPin(M1_CURR_AMPL_V_GPIO_Port, M1_CURR_AMPL_V_Pin);
-LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);
+LL_GPIO_LockPin(M1_PWM_WH_GPIO_Port, M1_PWM_WH_Pin);
 LL_GPIO_LockPin(M1_PWM_VH_GPIO_Port, M1_PWM_VH_Pin);
 LL_GPIO_LockPin(M1_PWM_VL_GPIO_Port, M1_PWM_VL_Pin);
-LL_GPIO_LockPin(M1_PWM_WH_GPIO_Port, M1_PWM_WH_Pin);
-LL_GPIO_LockPin(M1_PWM_WL_GPIO_Port, M1_PWM_WL_Pin);
+LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);
 LL_GPIO_LockPin(M1_PWM_UL_GPIO_Port, M1_PWM_UL_Pin);
+LL_GPIO_LockPin(M1_PWM_WL_GPIO_Port, M1_PWM_WL_Pin);
 LL_GPIO_LockPin(M1_BUS_VOLTAGE_GPIO_Port, M1_BUS_VOLTAGE_Pin);
 }
 /* USER CODE BEGIN mc_task 0 */

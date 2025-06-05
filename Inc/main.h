@@ -67,22 +67,32 @@ void Error_Handler(void);
 #define M1_CURR_AMPL_V_GPIO_Port GPIOC
 #define M1_CURR_AMPL_U_Pin GPIO_PIN_3
 #define M1_CURR_AMPL_U_GPIO_Port GPIOC
-#define M1_PWM_UL_Pin GPIO_PIN_13
-#define M1_PWM_UL_GPIO_Port GPIOB
+#define ENABLE_Pin GPIO_PIN_4
+#define ENABLE_GPIO_Port GPIOA
+#define NSCS_Pin GPIO_PIN_4
+#define NSCS_GPIO_Port GPIOC
+#define CAL_Pin GPIO_PIN_5
+#define CAL_GPIO_Port GPIOC
+#define M1_PWM_WL_Pin GPIO_PIN_13
+#define M1_PWM_WL_GPIO_Port GPIOB
 #define M1_PWM_VL_Pin GPIO_PIN_14
 #define M1_PWM_VL_GPIO_Port GPIOB
-#define M1_PWM_WL_Pin GPIO_PIN_15
-#define M1_PWM_WL_GPIO_Port GPIOB
-#define M1_PWM_UH_Pin GPIO_PIN_8
-#define M1_PWM_UH_GPIO_Port GPIOA
+#define M1_PWM_UL_Pin GPIO_PIN_15
+#define M1_PWM_UL_GPIO_Port GPIOB
+#define M1_PWM_WH_Pin GPIO_PIN_8
+#define M1_PWM_WH_GPIO_Port GPIOA
 #define M1_PWM_VH_Pin GPIO_PIN_9
 #define M1_PWM_VH_GPIO_Port GPIOA
-#define M1_PWM_WH_Pin GPIO_PIN_10
-#define M1_PWM_WH_GPIO_Port GPIOA
+#define M1_PWM_UH_Pin GPIO_PIN_10
+#define M1_PWM_UH_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
+#define UART_TX_Pin GPIO_PIN_6
+#define UART_TX_GPIO_Port GPIOB
+#define UART_RX_Pin GPIO_PIN_7
+#define UART_RX_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

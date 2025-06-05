@@ -4,6 +4,9 @@
         "motorcontrol.h": "c",
         "mc_config.h": "c",
         "mc_api.h": "c",
-        "mcpa.h": "c"
-    }
+        "mcpa.h": "c",
+        "mc_interface.h": "c",
+    },
+    "debug.inlineValues": true,
+    "cortex-debug.variableUseNaturalFormat": false,
 }

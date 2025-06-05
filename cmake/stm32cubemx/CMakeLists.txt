@@ -27,11 +27,13 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Src/gpio.c
     ${CMAKE_SOURCE_DIR}/Src/adc.c
     ${CMAKE_SOURCE_DIR}/Src/cordic.c
+    ${CMAKE_SOURCE_DIR}/Src/dma.c
     ${CMAKE_SOURCE_DIR}/Src/motorcontrol.c
     ${CMAKE_SOURCE_DIR}/Src/pwm_common.c
     ${CMAKE_SOURCE_DIR}/Src/mc_api.c
     ${CMAKE_SOURCE_DIR}/Src/mc_config.c
     ${CMAKE_SOURCE_DIR}/Src/mc_config_common.c
+    ${CMAKE_SOURCE_DIR}/Src/mcp_config.c
     ${CMAKE_SOURCE_DIR}/Src/mc_tasks.c
     ${CMAKE_SOURCE_DIR}/Src/mc_tasks_foc.c
     ${CMAKE_SOURCE_DIR}/Src/pwm_curr_fdbk.c
@@ -41,10 +43,16 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Src/stm32_mc_common_it.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_mc_it.c
     ${CMAKE_SOURCE_DIR}/Src/mc_parameters.c
+    ${CMAKE_SOURCE_DIR}/Src/register_interface.c
+    ${CMAKE_SOURCE_DIR}/Src/mcp.c
     ${CMAKE_SOURCE_DIR}/Src/mc_perf.c
+    ${CMAKE_SOURCE_DIR}/Src/usart_aspep_driver.c
     ${CMAKE_SOURCE_DIR}/Src/mc_configuration_registers.c
+    ${CMAKE_SOURCE_DIR}/Src/aspep.c
     ${CMAKE_SOURCE_DIR}/Src/mc_app_hooks.c
+    ${CMAKE_SOURCE_DIR}/Src/spi.c
     ${CMAKE_SOURCE_DIR}/Src/tim.c
+    ${CMAKE_SOURCE_DIR}/Src/usart.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_it.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_hal_msp.c
     ${CMAKE_SOURCE_DIR}/Src/sysmem.c
@@ -72,8 +80,12 @@ set(STM32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi_ex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c
 )
 
 # Drivers Midllewares
