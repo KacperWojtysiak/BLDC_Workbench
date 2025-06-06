@@ -107,6 +107,22 @@
 #define DELTA_V_HYSTERESIS                  (dV_dT * DELTA_TEMP_HYSTERESIS)
 #define OV_TEMPERATURE_HYSTERESIS_d         (DELTA_V_HYSTERESIS * INT_SUPPLY_VOLTAGE)
 
+#undef MAX_APPLICATION_SPEED_RPM
+#define MAX_APPLICATION_SPEED_RPM           50000
+#undef F1
+#define F1                                  0
+#undef CORD_F1
+#define CORD_F1                             0
+#define SPEED_REGULATOR_BANDWIDTH           0 /* Dummy value */
+#define LDLQ_RATIO                          1.000 /*!< Ld vs Lq ratio.*/
+#define RESISTOR_OFFSET                     0.01 /* computed resitance offset to compensate error meaasuremnt due to board */
+#define BUS_VOLTAGE_CONVERSION_FACTOR       63.2
+#define CURRENT_REGULATOR_BANDWIDTH         6000
+#define MP_KP                               1.00f  /* Initial Kp factor of the speed regulator */
+#define MP_KI                               0.1f   /* Initial Ki factor of the speed regulator */
+#define DC_CURRENT_RS_MEAS                  ((5) * 80) / 100 /* Maximum level of direct current = 80% of Max Board current */
+#define I_THRESHOLD                         0.05
+
 /*************** Timer for PWM generation & currenst sensing parameters  ******/
 #define PWM_PERIOD_CYCLES                   (uint16_t)(((uint32_t)ADV_TIM_CLK_MHz * (uint32_t)1000000u\
                                             / ((uint32_t)(PWM_FREQUENCY))) & (uint16_t)0xFFFE)

@@ -28,6 +28,8 @@
 #include "mc_interface.h"
 #include "mc_configuration_registers.h"
 #include "virtual_bus_voltage_sensor.h"
+#include "mp_one_touch_tuning.h"
+#include "mp_self_com_ctrl.h"
 
 extern NTC_Handle_t TempSensor_M1;
 extern VirtualSpeedSensor_Handle_t VirtualSpeedSensorM1;

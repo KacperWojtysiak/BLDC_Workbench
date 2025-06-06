@@ -119,7 +119,7 @@ typedef struct
 #define FLAG_MCP_OVER_UARTB        0U
 
 #define configurationFlag1_M1     (0U)
-#define configurationFlag2_M1     (0U)
+#define configurationFlag2_M1     (PROFILER_FLAG)
 
 #define DRIVE_TYPE_M1              0
 #define PRIM_SENSOR_M1            EPLL

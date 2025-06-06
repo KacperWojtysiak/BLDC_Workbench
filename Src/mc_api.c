@@ -716,11 +716,18 @@ __weak float_t MC_GetAveragePowerMotor1_F(void)
 }
 
 /**
- * @brief Not implemented MC_Profiler function.
- *  */ //cstat !MISRAC2012-Rule-2.7 !RED-unused-param  !MISRAC2012-Rule-2.7  !MISRAC2012-Rule-8.13
+ * @brief call the correct profiler command.
+ * Interface is generic MCPV2 interface :
+ * - rxLength : length of data send in the payload command
+ * - rxBuffer : pointer to the actual payload command
+ * - txSyncFreeSpace : Total amount of space available for the answer
+ * - txLength : Amount of space actually used for the answer - Set in the command itself
+ * - txBuffer : Pointer to the buffer containing the answer
+ * @retval returns MCP_CMD_OK or MCP_CMD_NOK if profiler is started correctly or not.
+ *  */
 __weak uint8_t MC_ProfilerCommand(uint16_t rxLength, uint8_t *rxBuffer, int16_t txSyncFreeSpace, uint16_t *txLength, uint8_t *txBuffer)
 {
-  return (MCP_CMD_UNKNOWN);
+  return (SCC_CMD(&SCC, rxLength, rxBuffer, txSyncFreeSpace, txLength, txBuffer));
 }
 
 /**

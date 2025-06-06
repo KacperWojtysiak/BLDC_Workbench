@@ -27,6 +27,9 @@
 #include "parameters_conversion.h"
 #include "r3_1_g4xx_pwm_curr_fdbk.h"
 
+#include "mp_self_com_ctrl.h"
+#include "mp_one_touch_tuning.h"
+
 /* USER CODE BEGIN Additional include */
 
 /* USER CODE END Additional include */
@@ -101,6 +104,70 @@ const R3_1_Params_t R3_1_ParamsM1 =
 /* DAC settings --------------------------------------------------------------*/
   .DAC_OCP_Threshold =  0,
   .DAC_OVP_Threshold =  23830,
+
+};
+
+/*** Motor Profiler ***/
+
+SCC_Params_t SCC_Params =
+{
+  {
+    .FrequencyHz = TF_REGULATION_RATE,
+  },
+  .fRshunt                 = RSHUNT,
+  .fAmplificationGain      = AMPLIFICATION_GAIN,
+  .fVbusConvFactor         = BUS_VOLTAGE_CONVERSION_FACTOR,
+  .fVbusPartitioningFactor = VBUS_PARTITIONING_FACTOR,
+
+  .fRVNK                   = (float)(RESISTOR_OFFSET),
+
+  .fRSMeasCurrLevelMax     = (float)(DC_CURRENT_RS_MEAS),
+
+  .hDutyRampDuration       = (uint16_t)8000,
+
+  .hAlignmentDuration      = (uint16_t)(1000),
+  .hRSDetectionDuration    = (uint16_t)(500),
+  .fLdLqRatio              = (float)(LDLQ_RATIO),
+  .fCurrentBW              = (float)(CURRENT_REGULATOR_BANDWIDTH),
+  .bPBCharacterization     = false,
+
+  .wNominalSpeed           = MOTOR_MAX_SPEED_RPM,
+  .hPWMFreqHz              = (uint16_t)(PWM_FREQUENCY),
+  .bFOCRepRate             = (uint8_t)(REGULATION_EXECUTION_RATE),
+  .fMCUPowerSupply         = (float)ADC_REFERENCE_VOLTAGE,
+  .IThreshold              = I_THRESHOLD
+
+};
+
+OTT_Params_t OTT_Params =
+{
+  {
+    .FrequencyHz        = MEDIUM_FREQUENCY_TASK_RATE,         /*!< Frequency expressed in Hz at which the user
+                                                                  clocks the OTT calling OTT_MF method */
+  },
+  .fBWdef               = (float)(SPEED_REGULATOR_BANDWIDTH), /*!< Default bandwidth of speed regulator.*/
+  .fMeasWin             = 1.0f,                               /*!< Duration of measurement window for speed and
+                                                                  current Iq, expressed in seconds.*/
+  .bPolesPairs          = POLE_PAIR_NUM,                      /*!< Number of motor poles pairs.*/
+  .hMaxPositiveTorque   = (int16_t)NOMINAL_CURRENT,           /*!< Maximum positive value of motor
+                                                                   torque. This value represents
+                                                                   actually the maximum Iq current
+                                                                   expressed in digit.*/
+  .fCurrtRegStabTimeSec = 10.0f,                              /*!< Current regulation stabilization time in seconds.*/
+  .fOttLowSpeedPerc     = 0.6f,                               /*!< OTT lower speed percentage.*/
+  .fOttHighSpeedPerc    = 0.8f,                               /*!< OTT higher speed percentage.*/
+  .fSpeedStabTimeSec    = 20.0f,                              /*!< Speed stabilization time in seconds.*/
+  .fTimeOutSec          = 10.0f,                              /*!< Timeout for speed stabilization.*/
+  .fSpeedMargin         = 0.90f,                              /*!< Speed margin percentage to validate speed ctrl.*/
+  .wNominalSpeed        = MOTOR_MAX_SPEED_RPM,                /*!< Nominal speed set by the user expressed in RPM.*/
+  .spdKp                = MP_KP,                              /*!< Initial KP factor of the speed regulator to be
+                                                                   tuned.*/
+  .spdKi                = MP_KI,                              /*!< Initial KI factor of the speed regulator to be
+                                                                   tuned.*/
+  .spdKs                = 0.1f,                               /*!< Initial antiwindup factor of the speed regulator to
+                                                                   be tuned.*/
+  .fRshunt              = (float)(RSHUNT),                    /*!< Value of shunt resistor.*/
+  .fAmplificationGain   = (float)(AMPLIFICATION_GAIN)         /*!< Current sensing amplification gain.*/
 
 };
 

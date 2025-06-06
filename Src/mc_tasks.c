@@ -339,6 +339,7 @@ __weak void TSK_SafetyTask(void)
   /* USER CODE END TSK_SafetyTask 0 */
   if (1U == bMCBootCompleted)
   {
+    SCC_CheckOC_RL(&SCC);
     TSK_SafetyTask_PWMOFF(M1);
     /* User conversion execution */
     RCM_ExecUserConv();
@@ -374,6 +375,8 @@ __weak void TSK_SafetyTask_PWMOFF(uint8_t bMotor)
 
   if (MCI_GetFaultState(&Mci[bMotor]) != (uint32_t)MC_NO_FAULTS)
   {
+      SCC_Stop(&SCC);
+      OTT_Stop(&OTT);
     PWMC_SwitchOffPWM(pwmcHandle[bMotor]);
     FOC_Clear(bMotor);
     /* USER CODE BEGIN TSK_SafetyTask_PWMOFF 1 */
@@ -400,6 +403,8 @@ __weak void TSK_HardwareFaultTask(void)
   /* USER CODE BEGIN TSK_HardwareFaultTask 0 */
 
   /* USER CODE END TSK_HardwareFaultTask 0 */
+  SCC_Stop(&SCC);
+  OTT_Stop(&OTT);
    FOC_Clear(M1);
   MCI_FaultProcessing(&Mci[M1], MC_SW_ERROR, 0);
 

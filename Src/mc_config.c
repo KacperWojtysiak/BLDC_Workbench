@@ -124,7 +124,7 @@ RevUpCtrl_Handle_t RevUpControlM1 =
 {
   .hRUCFrequencyHz         = MEDIUM_FREQUENCY_TASK_RATE,
   .hStartingMecAngle       = (int16_t)((int32_t)(STARTING_ANGLE_DEG)* 65536/360),
-  .bFirstAccelerationStage = (ENABLE_SL_ALGO_FROM_PHASE-1u),
+  .bFirstAccelerationStage = ENABLE_SL_ALGO_FROM_PHASE,
   .hMinStartUpValidSpeed   = OBS_MINIMUM_SPEED_UNIT,
   .hMinStartUpFlySpeed     = (int16_t)(OBS_MINIMUM_SPEED_UNIT/2),
   .OTFStartupEnabled       = false,
@@ -291,6 +291,27 @@ CircleLimitation_Handle_t CircleLimitationM1 =
 {
   .MaxModule = MAX_MODULE,
   .MaxVd     = (uint16_t)((MAX_MODULE * 950) / 1000),
+};
+
+RampExtMngr_Handle_t RampExtMngrParamsSCC =
+{
+  .FrequencyHz = TF_REGULATION_RATE
+};
+
+SCC_Handle_t SCC =
+{
+  .pSCC_Params_str = &SCC_Params
+};
+
+RampExtMngr_Handle_t RampExtMngrParamsOTT =
+{
+  .FrequencyHz = MEDIUM_FREQUENCY_TASK_RATE
+};
+
+OTT_Handle_t OTT =
+{
+
+  .pOTT_Params_str = &OTT_Params
 };
 
 FOCVars_t FOCVars[NBR_OF_MOTORS];

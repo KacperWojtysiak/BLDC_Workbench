@@ -50,8 +50,8 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Src/mc_configuration_registers.c
     ${CMAKE_SOURCE_DIR}/Src/aspep.c
     ${CMAKE_SOURCE_DIR}/Src/mc_app_hooks.c
-    ${CMAKE_SOURCE_DIR}/Src/spi.c
     ${CMAKE_SOURCE_DIR}/Src/tim.c
+    ${CMAKE_SOURCE_DIR}/Src/spi.c
     ${CMAKE_SOURCE_DIR}/Src/usart.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_it.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_hal_msp.c
@@ -99,12 +99,12 @@ set(MotorControl_Src
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c
-    ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c
+    ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_bus_voltage_sensor.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c
     ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_1_g4xx_pwm_curr_fdbk.c
 )
@@ -112,11 +112,14 @@ set(MotorControl_Src
 # Link directories setup
 set(MX_LINK_DIRS
 
+    ${CMAKE_SOURCE_DIR}/MCSDK_v6.3.2-Full/MotorControl/libMP
 )
 # Project static libraries
-set(MX_LINK_LIBS 
+set(MX_LINK_LIBS  
+	:libmp-G4-IAR_ARMv7-M.a
     STM32_Drivers
-    MotorControl	
+    MotorControl
+	
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)

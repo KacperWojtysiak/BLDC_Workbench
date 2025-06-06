@@ -67,7 +67,7 @@ void FOC_CalcCurrRef(uint8_t bMotor);
 void TSK_MF_StopProcessing(uint8_t motor);
 
 MCI_Handle_t *GetMCI(uint8_t bMotor);
-static uint16_t FOC_CurrControllerM1(void);
+bool SCC_DetectBemf( SCC_Handle_t * pHandle );
 
 void TSK_SafetyTask_PWMOFF(uint8_t motor);
 
@@ -135,6 +135,27 @@ __weak void FOC_Init(void)
     pREMNG[M1] = &RampExtMngrHFParamsM1;
     REMNG_Init(pREMNG[M1]);
 
+    SCC.pPWMC = pwmcHandle[M1];
+    SCC.pVBS = &BusVoltageSensor_M1;
+    SCC.pFOCVars = &FOCVars[M1];
+    SCC.pMCI = &Mci[M1];
+    SCC.pVSS = &VirtualSpeedSensorM1;
+    SCC.pCLM = &CircleLimitationM1;
+    SCC.pPIDIq = pPIDIq[M1];
+    SCC.pPIDId = pPIDId[M1];
+    SCC.pRevupCtrl = &RevUpControlM1;
+    SCC.pSTO = &STO_PLL_M1;
+    SCC.pSTC = &SpeednTorqCtrlM1;
+    SCC.pOTT = &OTT;
+    SCC.pHT = MC_NULL;
+    SCC_Init(&SCC);
+
+    OTT.pSpeedSensor = &STO_PLL_M1._Super;
+    OTT.pFOCVars = &FOCVars[M1];
+    OTT.pPIDSpeed = &PIDSpeedHandle_M1;
+    OTT.pSTC = &SpeednTorqCtrlM1;
+    OTT_Init(&OTT);
+
     FOC_Clear(M1);
     FOCVars[M1].bDriveInput = EXTERNAL;
     FOCVars[M1].Iqdref = STC_GetDefaultIqdref(pSTC[M1]);
@@ -155,6 +176,8 @@ void TSK_MF_StopProcessing(uint8_t motor)
 {
     R3_1_SwitchOffPWM(pwmcHandle[motor]);
 
+  SCC_Stop(&SCC);
+  OTT_Stop(&OTT);
   FOC_Clear(motor);
 
   TSK_SetStopPermanencyTimeM1(STOPPERMANENCY_TICKS);
@@ -205,6 +228,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               TSK_SetChargeBootCapDelayM1(M1_CHARGE_BOOT_CAP_TICKS);
               Mci[M1].State = CHARGE_BOOT_CAP;
             }
+            OTT_Clear(&OTT);
           }
           else
           {
@@ -231,9 +255,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               }
               else
               {
-                R3_1_TurnOnLowSides(pwmcHandle[M1],M1_CHARGE_BOOT_CAP_DUTY_CYCLES);
-                TSK_SetChargeBootCapDelayM1(M1_CHARGE_BOOT_CAP_TICKS);
-                Mci[M1].State = CHARGE_BOOT_CAP;
+                Mci[M1].State = WAIT_STOP_MOTOR;
               }
             }
             else
@@ -262,7 +284,13 @@ __weak void TSK_MediumFrequencyTaskM1(void)
 
               FOC_Clear( M1 );
 
-                Mci[M1].State = START;
+        SCC_Start(&SCC);
+              /* The generic function needs to be called here as the undelying
+               * implementation changes in time depending on the Profiler's state
+               * machine. Calling the generic function ensures that the correct
+               * implementation is invoked */
+              PWMC_SwitchOnPWM(pwmcHandle[M1]);
+              Mci[M1].State = START;
               PWMC_SwitchOnPWM(pwmcHandle[M1]);
             }
             else
@@ -290,7 +318,8 @@ __weak void TSK_MediumFrequencyTaskM1(void)
             if(! RUC_Exec(&RevUpControlM1))
             {
             /* The time allowed for the startup sequence has expired */
-              MCI_FaultProcessing(&Mci[M1], MC_START_UP, 0);
+              /* However, no error is generated when OPEN LOOP is enabled
+               * since then the system does not try to close the loop... */
             }
             else
             {
@@ -304,18 +333,10 @@ __weak void TSK_MediumFrequencyTaskM1(void)
 
             (void)VSS_CalcAvrgMecSpeedUnit(&VirtualSpeedSensorM1, &hForcedMecSpeedUnit);
 
-            /* Check that startup stage where the observer has to be used has been reached */
-            if (true == RUC_FirstAccelerationStageReached(&RevUpControlM1))
-            {
               ObserverConverged = STO_PLL_IsObserverConverged(&STO_PLL_M1, &hForcedMecSpeedUnit);
               STO_SetDirection(&STO_PLL_M1, (int8_t)MCI_GetImposedMotorDirection(&Mci[M1]));
 
               (void)VSS_SetStartTransition(&VirtualSpeedSensorM1, ObserverConverged);
-            }
-            else
-            {
-              ObserverConverged = false;
-            }
             if (ObserverConverged)
             {
               qd_t StatorCurrent = MCM_Park(FOCVars[M1].Ialphabeta, SPD_GetElAngle(&STO_PLL_M1._Super));
@@ -342,13 +363,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
             bool LoopClosed;
             int16_t hForcedMecSpeedUnit;
 
-            if (! RUC_Exec(&RevUpControlM1))
-            {
-              /* The time allowed for the startup sequence has expired */
-              MCI_FaultProcessing(&Mci[M1], MC_START_UP, 0);
-            }
-            else
-            {
               /* Compute the virtual speed and positions of the rotor.
                  The function returns true if the virtual speed is in the reliability range */
               LoopClosed = VSS_CalcAvrgMecSpeedUnit(&VirtualSpeedSensorM1, &hForcedMecSpeedUnit);
@@ -368,6 +382,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
                                     (((int32_t)FOCVars[M1].Iqdref.q * (int16_t)PID_GetKIDivisor(&PIDSpeedHandle_M1))
                                     / PID_SPEED_INTEGRAL_INIT_DIV));
 #endif
+                OTT_SR(&OTT);
                 /* USER CODE BEGIN MediumFrequencyTask M1 1 */
 
                 /* USER CODE END MediumFrequencyTask M1 1 */
@@ -378,7 +393,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
                 MCI_ExecBufferedCommands(&Mci[M1]); /* Exec the speed ramp after changing of the speed sensor */
                 Mci[M1].State = RUN;
               }
-            }
           }
           break;
         }
@@ -406,6 +420,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               {
                 /* Nothing to do */
               }
+            OTT_MF(&OTT);
           }
           break;
         }
@@ -450,6 +465,37 @@ __weak void TSK_MediumFrequencyTaskM1(void)
           break;
         }
 
+        case WAIT_STOP_MOTOR:
+        {
+          if (MCI_STOP == Mci[M1].DirectCommand)
+          {
+            TSK_MF_StopProcessing(M1);
+          }
+          else
+          {
+            if (0 == SCC_DetectBemf(&SCC))
+            {
+              /* In a sensorless configuration. Initiate the Revup procedure */
+              FOCVars[M1].bDriveInput = EXTERNAL;
+              STC_SetSpeedSensor(pSTC[M1], &VirtualSpeedSensorM1._Super);
+               STO_PLL_Clear(&STO_PLL_M1);
+              FOC_Clear(M1);
+              SCC_Start(&SCC);
+              /* The generic function needs to be called here as the undelying
+               * implementation changes in time depending on the Profiler's state
+               * machine. Calling the generic function ensures that the correct
+               * implementation is invoked */
+              PWMC_SwitchOnPWM(pwmcHandle[M1]);
+              Mci[M1].State = START;
+            }
+            else
+            {
+              /* Nothing to do */
+            }
+          }
+          break;
+        }
+
         default:
           break;
        }
@@ -463,6 +509,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
   {
     Mci[M1].State = FAULT_NOW;
   }
+  SCC_MF(&SCC);
   /* USER CODE BEGIN MediumFrequencyTask M1 6 */
 
   /* USER CODE END MediumFrequencyTask M1 6 */
@@ -580,25 +627,15 @@ __weak void FOC_CalcCurrRef(uint8_t bMotor)
 __attribute__((section (".ccmram")))
 #endif
 #endif
-
 /**
-  * @brief  Executes the Motor Control duties that require a high frequency rate and a precise timing.
-  *
-  *  This is mainly the FOC current control loop. It is executed depending on the state of the Motor Control
-  * subsystem (see the state machine(s)).
-  *
-  * @retval Number of the  motor instance which FOC loop was executed.
+  * @brief  Motor control profiler HF task
+  * @param  None
+  * @retval uint8_t It return always 0.
   */
 __weak uint8_t FOC_HighFrequencyTask(uint8_t bMotorNbr)
 {
-  uint16_t hFOCreturn;
-  /* USER CODE BEGIN HighFrequencyTask 0 */
+  ab_t Iab;
 
-  /* USER CODE END HighFrequencyTask 0 */
-
-  Observer_Inputs_t STO_Inputs; /* Only if sensorless main */
-
-  STO_Inputs.Valfa_beta = FOCVars[M1].Valphabeta;  /* Only if sensorless */
   if (SWITCH_OVER == Mci[M1].State)
   {
     if (!REMNG_RampCompleted(pREMNG[M1]))
@@ -614,94 +651,17 @@ __weak uint8_t FOC_HighFrequencyTask(uint8_t bMotorNbr)
   {
     /* Nothing to do */
   }
-  /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_1 */
-
-  /* USER CODE END HighFrequencyTask SINGLEDRIVE_1 */
-  hFOCreturn = FOC_CurrControllerM1();
-  /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_2 */
-
-  /* USER CODE END HighFrequencyTask SINGLEDRIVE_2 */
-  if(hFOCreturn == MC_DURATION)
-  {
-    MCI_FaultProcessing(&Mci[M1], MC_DURATION, 0);
-  }
-  else
-  {
-    bool IsAccelerationStageReached = RUC_FirstAccelerationStageReached(&RevUpControlM1);
-    STO_Inputs.Ialfa_beta = FOCVars[M1].Ialphabeta; /* Only if sensorless */
-    STO_Inputs.Vbus = VBS_GetAvBusVoltage_d(&(BusVoltageSensor_M1._Super)); /* Only for sensorless */
-    (void)STO_PLL_CalcElAngle(&STO_PLL_M1, &STO_Inputs);
-    STO_PLL_CalcAvrgElSpeedDpp(&STO_PLL_M1); /* Only in case of Sensor-less */
-    if (false == IsAccelerationStageReached)
-    {
-      STO_ResetPLL(&STO_PLL_M1);
-    }
-    else
-    {
-      /* Nothing to do */
-    }
-    /* Only for sensor-less */
-    if((START == Mci[M1].State) || (SWITCH_OVER == Mci[M1].State))
-    {
-      int16_t hObsAngle = SPD_GetElAngle(&STO_PLL_M1._Super);
-      (void)VSS_CalcElAngle(&VirtualSpeedSensorM1, &hObsAngle);
-    }
-    /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_3 */
-
-    /* USER CODE END HighFrequencyTask SINGLEDRIVE_3 */
-  }
-
-  return (bMotorNbr);
-
-}
-
-#if defined (CCMRAM)
-#if defined (__ICCARM__)
-#pragma location = ".ccmram"
-#elif defined (__CC_ARM) || defined(__GNUC__)
-__attribute__((section (".ccmram")))
-#endif
-#endif
-/**
-  * @brief It executes the core of FOC drive that is the controllers for Iqd
-  *        currents regulation. Reference frame transformations are carried out
-  *        accordingly to the active speed sensor. It must be called periodically
-  *        when new motor currents have been converted
-  * @param this related object of class CFOC.
-  * @retval int16_t It returns MC_NO_FAULTS if the FOC has been ended before
-  *         next PWM Update event, MC_DURATION otherwise
-  */
-inline uint16_t FOC_CurrControllerM1(void)
-{
-  qd_t Iqd, Vqd;
-  ab_t Iab;
-  alphabeta_t Ialphabeta, Valphabeta;
-  int16_t hElAngle;
-  uint16_t hCodeError;
-  SpeednPosFdbk_Handle_t *speedHandle;
-  speedHandle = STC_GetSpeedSensor(pSTC[M1]);
-  hElAngle = SPD_GetElAngle(speedHandle);
-  hElAngle += SPD_GetInstElSpeedDpp(speedHandle)*PARK_ANGLE_COMPENSATION_FACTOR;
-  PWMC_GetPhaseCurrents(pwmcHandle[M1], &Iab);
   RCM_ReadOngoingConv();
   RCM_ExecNextConv();
-  Ialphabeta = MCM_Clarke(Iab);
-  Iqd = MCM_Park(Ialphabeta, hElAngle);
-  Vqd.q = PI_Controller(pPIDIq[M1], (int32_t)(FOCVars[M1].Iqdref.q) - Iqd.q);
-  Vqd.d = PI_Controller(pPIDId[M1], (int32_t)(FOCVars[M1].Iqdref.d) - Iqd.d);
-  Vqd = Circle_Limitation(&CircleLimitationM1, Vqd);
-  hElAngle += SPD_GetInstElSpeedDpp(speedHandle)*REV_PARK_ANGLE_COMPENSATION_FACTOR;
-  Valphabeta = MCM_Rev_Park(Vqd, hElAngle);
-  hCodeError = PWMC_SetPhaseVoltage(pwmcHandle[M1], Valphabeta);
-
-  FOCVars[M1].Vqd = Vqd;
+  /* The generic function needs to be called here as the undelying
+   * implementation changes in time depending on the Profiler's state
+   * machine. Calling the generic function ensures that the correct
+   * implementation is invoked */
+  PWMC_GetPhaseCurrents(pwmcHandle[M1], &Iab);
   FOCVars[M1].Iab = Iab;
-  FOCVars[M1].Ialphabeta = Ialphabeta;
-  FOCVars[M1].Iqd = Iqd;
-  FOCVars[M1].Valphabeta = Valphabeta;
-  FOCVars[M1].hElAngle = hElAngle;
+  SCC_SetPhaseVoltage(&SCC);
 
-  return (hCodeError);
+  return (0); /* Single motor only */
 }
 
 /* USER CODE BEGIN mc_task 0 */

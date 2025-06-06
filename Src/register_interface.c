@@ -26,6 +26,8 @@
 #include "mc_config.h"
 #include "mcp.h"
 #include "mcp_config.h"
+#include "mp_one_touch_tuning.h"
+#include "mp_self_com_ctrl.h"
 #include "mc_configuration_registers.h"
 
 uint8_t RI_SetRegisterGlobal(uint16_t regID, uint8_t typeID, uint8_t *data, uint16_t *size, int16_t dataAvailable)
@@ -209,6 +211,32 @@ uint8_t RI_SetRegisterMotor1(uint16_t regID, uint8_t typeID, uint8_t *data, uint
           retVal = MCP_ERROR_RO_REG;
           break;
         }
+        case MC_REG_SC_PP:
+        {
+          uint8_t regdataU8 = *(uint8_t *)data;
+          SPD_SetElToMecRatio(&STO_PLL_M1._Super, regdataU8);
+          SPD_SetElToMecRatio(&VirtualSpeedSensorM1._Super, regdataU8);
+          SCC_SetPolesPairs(&SCC, regdataU8);
+          OTT_SetPolesPairs(&OTT, regdataU8);
+          break;
+        }
+
+        case MC_REG_SC_CHECK:
+        case MC_REG_SC_STATE:
+        case MC_REG_SC_STEPS:
+        case MC_REG_SC_FOC_REP_RATE:
+        case MC_REG_SC_COMPLETED:
+        {
+          retVal = MCP_ERROR_RO_REG;
+          break;
+        }
+
+          case MC_REG_PB_CHARACTERIZATION:
+        {
+          uint8_t regdataU8 = *(uint8_t *)data;
+          SCC_SetPBCharacterization(&SCC,regdataU8);
+          break;
+        }
 
         default:
         {
@@ -371,6 +399,24 @@ uint8_t RI_SetRegisterMotor1(uint16_t regID, uint8_t typeID, uint8_t *data, uint
         case MC_REG_DAC_USER2:
           break;
 
+        case MC_REG_OVERVOLTAGETHRESHOLD:
+        {
+          SCC_SetOverVoltageThreshold(&SCC,regdata16);
+          break;
+        }
+
+        case MC_REG_UNDERVOLTAGETHRESHOLD:
+        {
+          SCC_SetUnderVoltageThreshold(&SCC,regdata16);
+          break;
+        }
+
+        case MC_REG_SC_PWM_FREQUENCY:
+        {
+          retVal = MCP_ERROR_RO_REG;
+          break;
+        }
+
         case MC_REG_SPEED_KP_DIV:
         {
           PID_SetKPDivisorPOW2(&PIDSpeedHandle_M1, regdata16);
@@ -474,6 +520,71 @@ uint8_t RI_SetRegisterMotor1(uint16_t regID, uint8_t typeID, uint8_t *data, uint
 
         case MC_REG_STOPLL_EST_BEMF:
         case MC_REG_STOPLL_OBS_BEMF:
+        {
+          retVal = MCP_ERROR_RO_REG;
+          break;
+        }
+
+        case MC_REG_SC_RS:
+        case MC_REG_SC_LS:
+        case MC_REG_SC_KE:
+        case MC_REG_SC_VBUS:
+        case MC_REG_SC_MEAS_NOMINALSPEED:
+        {
+          retVal = MCP_ERROR_RO_REG;
+          break;
+        }
+
+        case MC_REG_SC_CURRENT:
+        { /* Profiler is supported only by series supporting unaligned access */
+          if(SCC.sm_state==SCC_IDLE || SCC_CALIBRATION_END==SCC.sm_state)
+          {
+            float fregdata = *(float*)data; //cstat !MISRAC2012-Rule-11.3
+            SCC_SetNominalCurrent(&SCC, fregdata);
+          }
+          else{
+              retVal = MCP_ERROR_RO_REG;
+          }
+          break;
+        }
+
+        case MC_REG_SC_SPDBANDWIDTH:
+        {
+          float fregdata = *(float*)data; //cstat !MISRAC2012-Rule-11.3
+          OTT_SetSpeedRegulatorBandwidth(&OTT, fregdata);
+          break;
+        }
+
+        case MC_REG_SC_LDLQRATIO:
+        {
+          float fregdata = *(float*)data; //cstat !MISRAC2012-Rule-11.3
+          SCC_SetLdLqRatio(&SCC, fregdata);
+          break;
+        }
+
+        case MC_REG_SC_NOMINAL_SPEED:
+        {
+          SCC_SetNominalSpeed (&SCC, (int32_t) regdata32);
+          break;
+        }
+
+        case MC_REG_SC_CURRBANDWIDTH:
+        {
+          float fregdata = *(float*)data; //cstat !MISRAC2012-Rule-11.3
+          SCC_SetCurrentBandwidth(&SCC, fregdata);
+          break;
+        }
+        case MC_REG_RESISTOR_OFFSET:
+        {
+          float fregdata = *(float*)data;
+          SCC_SetResistorOffset(&SCC,fregdata);
+          break;
+        }
+        case MC_REG_SC_J:
+        case MC_REG_SC_F:
+        case MC_REG_SC_MAX_CURRENT:
+        case MC_REG_SC_STARTUP_SPEED:
+        case MC_REG_SC_STARTUP_ACC:
         {
           retVal = MCP_ERROR_RO_REG;
           break;
@@ -781,6 +892,48 @@ uint8_t RI_GetRegisterGlobal(uint16_t regID,uint8_t typeID,uint8_t * data,uint16
               break;
             }
 
+            case MC_REG_SC_CHECK:
+            {
+              *data = (uint8_t) 1u;
+              break;
+            }
+
+            case MC_REG_SC_STATE:
+            {
+              uint8_t state ;
+              state = SCC_GetState(&SCC);
+              state += OTT_GetState (&OTT);
+              *data = state;
+              break;
+            }
+
+            case MC_REG_SC_STEPS:
+            {
+              uint8_t steps ;
+              steps = SCC_GetSteps(&SCC);
+              steps += OTT_GetSteps (&OTT);
+              *data = steps-1u;
+              break;
+            }
+
+            case MC_REG_SC_PP:
+            {
+              *data = SPD_GetElToMecRatio(&STO_PLL_M1._Super);
+              break;
+            }
+
+            case MC_REG_SC_FOC_REP_RATE:
+            {
+              *data = SCC_GetFOCRepRate(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_COMPLETED:
+            {
+              *data = OTT_IsMotorAlreadyProfiled(&OTT);
+              break;
+             }
+
             default:
             {
               retVal = MCP_ERROR_UNKNOWN_REG;
@@ -1015,6 +1168,21 @@ uint8_t RI_GetRegisterGlobal(uint16_t regID,uint8_t typeID,uint8_t * data,uint16
             case MC_REG_DAC_USER2:
               break;
 
+            case MC_REG_SC_PWM_FREQUENCY:
+              *regdataU16 = SCC_GetPWMFrequencyHz(&SCC);
+              break;
+            case MC_REG_OVERVOLTAGETHRESHOLD:
+            {
+              *regdataU16 = SCC_GetOverVoltageThreshold(&SCC);
+              break;
+            }
+
+            case MC_REG_UNDERVOLTAGETHRESHOLD:
+              {
+                *regdata16 = SCC_GetUnderVoltageThreshold(&SCC);
+              break;
+            }
+
             case MC_REG_SPEED_KP_DIV:
             {
               *regdataU16 = (uint16_t)PID_GetKPDivisorPOW2(&PIDSpeedHandle_M1);
@@ -1138,6 +1306,117 @@ uint8_t RI_GetRegisterGlobal(uint16_t regID,uint8_t typeID,uint8_t * data,uint16
               FloatToU32 ReadVal; //cstat !MISRAC2012-Rule-19.2
               ReadVal.Float_Val = PQD_GetAvrgElMotorPowerW(pMPM[M1]);
               *regdataU32 = ReadVal.U32_Val; //cstat !UNION-type-punning
+              break;
+            }
+
+            case MC_REG_SC_RS:
+            {
+              *regdataU32 = SCC_GetRs(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_LS:
+            {
+              *regdataU32 = SCC_GetLs(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_KE:
+            {
+              *regdataU32 = SCC_GetKe(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_VBUS:
+            {
+              *regdataU32 = SCC_GetVbus(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_MEAS_NOMINALSPEED:
+            {
+              *regdataU32 = OTT_GetNominalSpeed(&OTT);
+              break;
+            }
+
+            case MC_REG_SC_CURRENT:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = SCC_GetNominalCurrent(&SCC);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_SPDBANDWIDTH:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = OTT_GetSpeedRegulatorBandwidth(&OTT);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_LDLQRATIO:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = SCC_GetLdLqRatio(&SCC);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_NOMINAL_SPEED:
+            {
+              *regdata32 = SCC_GetNominalSpeed(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_CURRBANDWIDTH:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = SCC_GetCurrentBandwidth(&SCC);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_J:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = OTT_GetJ(&OTT);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_F:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = OTT_GetF(&OTT);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_MAX_CURRENT:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val = SCC_GetStartupCurrentAmp(&SCC);
+              *regdataU32 = ReadVal.U32_Val;
+              break;
+            }
+
+            case MC_REG_SC_STARTUP_SPEED:
+            {
+              *regdata32 = SCC_GetEstMaxOLSpeed(&SCC);
+              break;
+            }
+
+            case MC_REG_SC_STARTUP_ACC:
+            {
+              *regdata32 = SCC_GetEstMaxAcceleration(&SCC);
+              break;
+            }
+            case MC_REG_RESISTOR_OFFSET:
+            {
+              FloatToU32 ReadVal;
+              ReadVal.Float_Val=SCC_GetResistorOffset(&SCC);
+              *regdata32 =ReadVal.U32_Val;
               break;
             }
 
