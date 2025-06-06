@@ -69,8 +69,6 @@ void Error_Handler(void);
 #define ENABLE_GPIO_Port GPIOA
 #define NSCS_Pin GPIO_PIN_4
 #define NSCS_GPIO_Port GPIOC
-#define CAL_Pin GPIO_PIN_5
-#define CAL_GPIO_Port GPIOC
 #define M1_PWM_WL_Pin GPIO_PIN_13
 #define M1_PWM_WL_GPIO_Port GPIOB
 #define M1_PWM_VL_Pin GPIO_PIN_14

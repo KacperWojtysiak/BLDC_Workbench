@@ -50,8 +50,8 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Src/mc_configuration_registers.c
     ${CMAKE_SOURCE_DIR}/Src/aspep.c
     ${CMAKE_SOURCE_DIR}/Src/mc_app_hooks.c
-    ${CMAKE_SOURCE_DIR}/Src/tim.c
     ${CMAKE_SOURCE_DIR}/Src/spi.c
+    ${CMAKE_SOURCE_DIR}/Src/tim.c
     ${CMAKE_SOURCE_DIR}/Src/usart.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_it.c
     ${CMAKE_SOURCE_DIR}/Src/stm32g4xx_hal_msp.c
